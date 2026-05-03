@@ -9,10 +9,8 @@
 
 #define MOUSE 1
 #define MARK 2
-#define CURSOR 3
-#define FUNCTION 4
-#define SCROLL 5
-#define WIRELESS 6
+#define FUNCTION 3
+#define SCROLL 4
 
 //mouse cursol
 
@@ -146,7 +144,6 @@
         };
 
         //3
-        //4
 
         FUNCTION {
             bindings = <
@@ -159,6 +156,7 @@
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
         };
 
+        //4
         SCROLL {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
