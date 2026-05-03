@@ -53,44 +53,17 @@
     scroller {
         layers = <SCROLL>;
         input-processors =
-            // スクロール用に感度を小さくする
+            // スクロール用に感度を小さくする,
             <&zip_xy_scaler 1 10>,
-            // スクロール方向を逆転
+            // スクロール方向を逆転,
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            // マウス移動をスクロールに割り当て
+            // マウス移動をスクロールに割り当て,
             <&zip_xy_to_scroll_mapper>;
     };
 };
 
 / {
-    combos {
-        compatible = "zmk,combos";
-
-        CenterClick {
-            bindings = <&mkp MB3>;
-            key-positions = <17 16>;
-        };
-
-        RightClick {
-            bindings = <&mkp MB2>;
-            key-positions = <18 17>;
-        };
-
-        PrevClick {
-            bindings = <&mkp MB4>;
-            key-positions = <27 28>;
-        };
-
-        ClickNext {
-            bindings = <&mkp MB5>;
-            key-positions = <26 27>;
-        };
-
-        Scroll {
-            bindings = <&mo 4>;
-            key-positions = <18 19>;
-        };
-    };
+    combos { compatible = "zmk,combos"; };
 
     behaviors {
         re_kp: sensor_rotate_kp {
@@ -114,7 +87,7 @@
         default_layer {
             bindings = <
 &kp Q     &kp W     &kp E    &kp R  &kp T                                            &kp Y        &kp U  &kp I      &kp O     &kp P
-&kp A     &kp S     &kp D    &kp F  &kp G                                            &kp H        &kp J  &kp K      &kp L     &kp MINUS
+&kp A     &kp S     &kp D    &kp F  &kp G                                            &kp H        &kp J  &kp K      &kp L     &lt 4 MINUS
 &kp Z     &kp X     &kp C    &kp V  &kp B                                            &kp N        &kp M  &kp COMMA  &kp DOT   &kp FSLH
 &kp LGUI  &kp LALT  &kp TAB  &none  &kp LCTRL  &lt 3 SPACE    &mt RIGHT_SHIFT ENTER  &lt 2 SPACE         &none      &kp SEMI  &kp EQUAL
             >;
@@ -160,12 +133,13 @@
         };
 
         //4
+
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans                    &mkp MB4  &mkp MB2  &mkp MB3  &mkp MB5  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans              &trans    &trans    &trans
             >;
         };
 
