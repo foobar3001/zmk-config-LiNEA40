@@ -54,7 +54,7 @@
         layers = <SCROLL>;
         input-processors =
             // スクロール用に感度を小さくする
-            <&zip_xy_scaler 1 8>,
+            <&zip_xy_scaler 1 10>,
             // スクロール方向を逆転
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
             // マウス移動をスクロールに割り当て
