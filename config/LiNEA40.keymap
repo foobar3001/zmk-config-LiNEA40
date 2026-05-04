@@ -53,11 +53,11 @@
     scroller {
         layers = <SCROLL>;
         input-processors =
-            // スクロール用に感度を小さくする,,,,,
+            // スクロール用に感度を小さくする,,,,,,
             <&zip_xy_scaler 1 30>,
-            // スクロール方向を逆転,,,,,
+            // スクロール方向を逆転,,,,,,
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            // マウス移動をスクロールに割り当て,,,,,
+            // マウス移動をスクロールに割り当て,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -80,11 +80,13 @@
             tap-ms = <20>;
         };
 
-        rotate_sticky: rotate_sticky {
+        re_kp_delay: re_kp_delay {
             compatible = "zmk,behavior-sensor-rotate-var";
-            label = "ROTATE_STICKY";
+            label = "RE_KP_DELAY";
             #sensor-binding-cells = <2>;
-            bindings = <&sk>, <&sk>;
+            bindings = <&kp>, <&kp>;
+
+            tap-ms = <50>;
         };
     };
 
@@ -99,7 +101,7 @@
 &kp LGUI  &kp LALT  &kp RIGHT_SHIFT  &none  &kp LCTRL  &lt 3 SPACE    &mt RIGHT_SHIFT ENTER  &lt 2 SPACE         &none      &kp SEMI  &kp EQUAL
             >;
 
-            sensor-bindings = <&re_kp ESC TAB>;
+            sensor-bindings = <&re_kp_delay ESC TAB>;
         };
 
         //1
