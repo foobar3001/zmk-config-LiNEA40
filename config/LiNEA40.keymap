@@ -54,12 +54,20 @@
     scroller {
         layers = <DEFAULT>;
         input-processors =
-            // スクロール用に感度を小さくする,,,,,,,,,
+            // スクロール用に感度を小さくする
             <&zip_xy_scaler 1 30>,
-            // スクロール方向を逆転,,,,,,,,,
+            // スクロール方向を逆転
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            // マウス移動をスクロールに割り当て,,,,,,,,,
+            // マウス移動をスクロールに割り当て
             <&zip_xy_to_scroll_mapper>;
+    };
+    pointer {
+        layers = <SCROLL>;
+        input-processors =
+            // ポインター移動用に感度を調整（必要に応じて数値を調整）
+            <&zip_xy_scaler 1 1>,
+            // XYをそのままポインター移動に割り当て
+            <&zip_xy_to_mouse_mapper>;
     };
 };
 
