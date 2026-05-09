@@ -65,9 +65,7 @@
         layers = <SCROLL>;
         input-processors =
             // ポインター移動用に感度を調整（必要に応じて数値を調整）
-            <&zip_xy_scaler 1 1>,
-            // XYをそのままポインター移動に割り当て
-            <&zip_xy_to_mouse_mapper>;
+            <&zip_xy_scaler 1 1>;
     };
 };
 
