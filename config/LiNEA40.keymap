@@ -12,6 +12,14 @@
 #define FUNCTION 3
 #define SCROLL 4
 
+&mt {
+    flavor = "hold-preferred";
+};
+
+&lt {
+    flavor = "hold-preferred";
+};
+
 //mouse cursol
 
 &mmv {
