@@ -13,14 +13,6 @@
 #define SCROLL 5
 #define WIRELESS 6
 
-&mt {
-    flavor = "hold-preferred";
-};
-
-&lt {
-    flavor = "hold-preferred";
-};
-
 //mouse cursol
 &mmv {
     delay-ms = <20>;
