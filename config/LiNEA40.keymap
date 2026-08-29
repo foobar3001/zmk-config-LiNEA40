@@ -12,13 +12,9 @@
 #define FUNCTION 3
 #define SCROLL 4
 
-&mt {
-    flavor = "hold-preferred";
-};
+&mt { flavor = "hold-preferred"; };
 
-&lt {
-    flavor = "hold-preferred";
-};
+&lt { flavor = "hold-preferred"; };
 
 //mouse cursol
 
@@ -61,11 +57,11 @@
     scroller {
         layers = <SCROLL>;
         input-processors =
-            // スクロール用に感度を小さくする,,,,,,,,
+            // スクロール用に感度を小さくする,,,,,,,,,
             <&zip_xy_scaler 1 30>,
-            // スクロール方向を逆転,,,,,,,,
+            // スクロール方向を逆転,,,,,,,,,
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            // マウス移動をスクロールに割り当て,,,,,,,,
+            // マウス移動をスクロールに割り当て,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -104,8 +100,8 @@
         default_layer {
             bindings = <
 &kp Q     &kp W     &kp E       &kp R  &kp T                                            &kp Y      &kp U  &kp I              &kp O     &kp P
-&kp A     &kp S     &kp D       &kp F  &kp G                                            &kp H      &kp J  &kp K              &lt 4 L   &lt 4 MINUS
-&kp Z     &kp X     &kp C       &kp V  &kp B                                            &kp N      &kp M  &kp COMMA          &kp DOT   &lt 4 SLASH
+&kp A     &kp S     &kp D       &kp F  &kp G                                            &kp H      &kp J  &kp K              &kp L     &kp MINUS
+&kp Z     &kp X     &kp C       &kp V  &kp B                                            &kp N      &kp M  &kp COMMA          &kp DOT   &kp SLASH
 &kp LGUI  &kp LALT  &kp LSHIFT  &none  &kp LCTRL  &lt 3 SPACE    &mt RIGHT_SHIFT ENTER  &lt 2 TAB         &kp RIGHT_COMMAND  &kp SEMI  &kp EQUAL
             >;
 
