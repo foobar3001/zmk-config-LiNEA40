@@ -92,6 +92,55 @@
 
             tap-ms = <50>;
         };
+
+        // 直前の入力が文字なら句読点、それ以外（アイドル・クリック・Ctrl+C など）はマウスボタン
+        ak_mb1: adaptive_mb1 {
+            compatible = "zmk,behavior-adaptive-key";
+            #binding-cells = <0>;
+            bindings = <&mkp MB1>;
+
+            after_alpha {
+                trigger-keys = <A B C D E F G H I J K L M N O P Q R S T U V W X Y Z>;
+                max-prior-idle-ms = <1000>;
+                strict-modifiers;
+                bindings = <&kp COMMA>;
+            };
+            after_shifted {
+                trigger-keys = <LS(A) LS(B) LS(C) LS(D) LS(E) LS(F) LS(G) LS(H) LS(I) LS(J) LS(K) LS(L) LS(M) LS(N) LS(O) LS(P) LS(Q) LS(R) LS(S) LS(T) LS(U) LS(V) LS(W) LS(X) LS(Y) LS(Z)>;
+                max-prior-idle-ms = <1000>;
+                strict-modifiers;
+                bindings = <&kp COMMA>;
+            };
+            after_other {
+                trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE ENTER BSPC MINUS COMMA PERIOD SLASH SEMI>;
+                max-prior-idle-ms = <1000>;
+                bindings = <&kp COMMA>;
+            };
+        };
+
+        ak_mb2: adaptive_mb2 {
+            compatible = "zmk,behavior-adaptive-key";
+            #binding-cells = <0>;
+            bindings = <&mkp MB2>;
+
+            after_alpha {
+                trigger-keys = <A B C D E F G H I J K L M N O P Q R S T U V W X Y Z>;
+                max-prior-idle-ms = <1000>;
+                strict-modifiers;
+                bindings = <&kp PERIOD>;
+            };
+            after_shifted {
+                trigger-keys = <LS(A) LS(B) LS(C) LS(D) LS(E) LS(F) LS(G) LS(H) LS(I) LS(J) LS(K) LS(L) LS(M) LS(N) LS(O) LS(P) LS(Q) LS(R) LS(S) LS(T) LS(U) LS(V) LS(W) LS(X) LS(Y) LS(Z)>;
+                max-prior-idle-ms = <1000>;
+                strict-modifiers;
+                bindings = <&kp PERIOD>;
+            };
+            after_other {
+                trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE ENTER BSPC MINUS COMMA PERIOD SLASH SEMI>;
+                max-prior-idle-ms = <1000>;
+                bindings = <&kp PERIOD>;
+            };
+        };
     };
 
     keymap {
@@ -101,7 +150,7 @@
             bindings = <
 &kp Q     &kp W     &kp E       &kp R    &kp T                                            &kp Y      &kp U  &kp I      &kp O       &kp P
 &kp A     &kp S     &kp D       &kp F    &kp G                                            &kp H      &kp J  &kp K      &kp L       &kp MINUS
-&kp Z     &kp X     &kp C       &kp V    &kp B                                            &kp N      &kp M  &mkp MB1   &mkp MB2    &lt 4 SLASH
+&kp Z     &kp X     &kp C       &kp V    &kp B                                            &kp N      &kp M  &ak_mb1    &ak_mb2     &lt 4 SLASH
 &kp LGUI  &kp LALT  &kp LSHIFT  &kp TAB  &kp LCTRL  &lt 3 SPACE    &mt RIGHT_SHIFT ENTER  &lt 2 TAB         &kp COMMA  &kp PERIOD  &kp SEMI
             >;
 
