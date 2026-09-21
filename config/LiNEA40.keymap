@@ -148,7 +148,7 @@
                 bindings = <&kp COMMA>;
             };
             after_shifted {
-                trigger-keys = <LS(A) LS(B) LS(C) LS(D) LS(E) LS(F) LS(G) LS(H) LS(I) LS(J) LS(K) LS(L) LS(M) LS(N) LS(O) LS(P) LS(Q) LS(R) LS(S) LS(T) LS(U) LS(V) LS(W) LS(X) LS(Y) LS(Z)>;
+                trigger-keys = <LS(A) LS(B) LS(C) LS(D) LS(E) LS(F) LS(G) LS(H) LS(I) LS(J) LS(K) LS(L) LS(M) LS(N) LS(O) LS(P) LS(Q) LS(R) LS(S) LS(T) LS(U) LS(V) LS(W) LS(X) LS(Y) LS(Z) RS(A) RS(B) RS(C) RS(D) RS(E) RS(F) RS(G) RS(H) RS(I) RS(J) RS(K) RS(L) RS(M) RS(N) RS(O) RS(P) RS(Q) RS(R) RS(S) RS(T) RS(U) RS(V) RS(W) RS(X) RS(Y) RS(Z)>;
                 max-prior-idle-ms = <1500>;
                 strict-modifiers;
                 bindings = <&kp COMMA>;
@@ -173,7 +173,7 @@
                 bindings = <&kp PERIOD>;
             };
             after_shifted {
-                trigger-keys = <LS(A) LS(B) LS(C) LS(D) LS(E) LS(F) LS(G) LS(H) LS(I) LS(J) LS(K) LS(L) LS(M) LS(N) LS(O) LS(P) LS(Q) LS(R) LS(S) LS(T) LS(U) LS(V) LS(W) LS(X) LS(Y) LS(Z)>;
+                trigger-keys = <LS(A) LS(B) LS(C) LS(D) LS(E) LS(F) LS(G) LS(H) LS(I) LS(J) LS(K) LS(L) LS(M) LS(N) LS(O) LS(P) LS(Q) LS(R) LS(S) LS(T) LS(U) LS(V) LS(W) LS(X) LS(Y) LS(Z) RS(A) RS(B) RS(C) RS(D) RS(E) RS(F) RS(G) RS(H) RS(I) RS(J) RS(K) RS(L) RS(M) RS(N) RS(O) RS(P) RS(Q) RS(R) RS(S) RS(T) RS(U) RS(V) RS(W) RS(X) RS(Y) RS(Z)>;
                 max-prior-idle-ms = <1500>;
                 strict-modifiers;
                 bindings = <&kp PERIOD>;
