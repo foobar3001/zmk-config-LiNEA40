@@ -5,6 +5,7 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/modifiers.h>
 #include <dt-bindings/zmk/pointing.h>
 
 #define MOUSE 1
@@ -218,6 +219,51 @@
                 bindings = <&kp PERIOD>;
             };
         };
+
+        // 左Shiftはクリック（ドラッグ）、右Shiftは < >
+        mb1_rs: mb1_rs {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&ak_mb1>, <&kp COMMA>;
+            mods = <(MOD_RSFT)>;
+            keep-mods = <(MOD_RSFT)>;
+        };
+        mb1_ls: mb1_ls {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&mb1_rs>, <&mkp MB1>;
+            mods = <(MOD_LSFT)>;
+            keep-mods = <(MOD_LSFT)>;
+        };
+        mb2_rs: mb2_rs {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&ak_mb2>, <&kp PERIOD>;
+            mods = <(MOD_RSFT)>;
+            keep-mods = <(MOD_RSFT)>;
+        };
+        mb2_ls: mb2_ls {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&mb2_rs>, <&mkp MB2>;
+            mods = <(MOD_LSFT)>;
+            keep-mods = <(MOD_LSFT)>;
+        };
+        // AML 中は句読点判定を使わず、右Shiftだけ < > にする
+        mb1_aml: mb1_aml {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&mkp MB1>, <&kp COMMA>;
+            mods = <(MOD_RSFT)>;
+            keep-mods = <(MOD_RSFT)>;
+        };
+        mb2_aml: mb2_aml {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&mkp MB2>, <&kp PERIOD>;
+            mods = <(MOD_RSFT)>;
+            keep-mods = <(MOD_RSFT)>;
+        };
     };
 
     keymap {
@@ -227,7 +273,7 @@
             bindings = <
 &kp Q     &kp W     &kp E       &kp R    &kp T                                            &kp Y      &kp U  &kp I      &kp O        &kp P
 &kp A     &kp S     &kp D       &kp F    &kp G                                            &kp H      &lsc 4 J  &kp K      &kp L        &kp MINUS
-&kp Z     &kp X     &kp C       &kp V    &kp B                                            &kp N      &lsc 4 M  &ak_mb1    &ak_mb2      &kp SLASH
+&kp Z     &kp X     &kp C       &kp V    &kp B                                            &kp N      &lsc 4 M  &mb1_ls    &mb2_ls      &kp SLASH
 &kp LGUI  &kp LALT  &kp LSHIFT  &kp TAB  &kp LCTRL  &ak_lt 3 SPACE    &mt RIGHT_SHIFT ENTER  &ak_lt 2 TAB         &kp COMMA  &kp PERIOD   &kp SEMI
             >;
 
@@ -240,7 +286,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans     &trans     &trans
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans     &trans     &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &mkp MB1   &mkp MB2   &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &mb1_aml  &mb2_aml  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans     &trans     &trans
             >;
         };
