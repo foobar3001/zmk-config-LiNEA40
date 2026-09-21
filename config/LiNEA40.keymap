@@ -44,6 +44,13 @@
             codes = <INPUT_REL_WHEEL>;
             track-remainders;
         };
+
+        // ボール操作で MOUSE を乗せ、クリック以外のキーで外す（句読点クールタイムを打ち切る）
+        zip_ak_mouse: zip_ak_mouse {
+            compatible = "zmk,input-processor-temp-layer";
+            #input-processor-cells = <2>;
+            excluded-positions = <27 28>;
+        };
     };
 };
 
@@ -55,9 +62,12 @@
 };
 
 &trackball_listener {
+    input-processors = <&zip_ak_mouse MOUSE 1500>;
+
     scroller {
         layers = <SCROLL>;
         input-processors =
+            <&zip_ak_mouse MOUSE 1500>,
             // スクロール用に感度を小さくする,,,,,,,,,,,,,,
             <&zip_xy_scaler 1 30>,
             // スクロール方向を逆転,,,,,,,,,,,,,,
@@ -159,6 +169,12 @@
                 strict-modifiers;
                 bindings = <&kp COMMA>;
             };
+            after_edit {
+                trigger-keys = <LC(C) LC(V) LC(X) RC(C) RC(V) RC(X) LG(C) LG(V) LG(X) RG(C) RG(V) RG(X)>;
+                max-prior-idle-ms = <1500>;
+                strict-modifiers;
+                bindings = <&kp COMMA>;
+            };
             after_other {
                 trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE ENTER BSPC MINUS COMMA PERIOD SLASH SEMI LANG1 LANG2 LEFT RIGHT UP DOWN PAGE_UP PAGE_DOWN HOME END AK_LAYER_MARK>;
                 max-prior-idle-ms = <1500>;
@@ -190,6 +206,12 @@
                 strict-modifiers;
                 bindings = <&kp PERIOD>;
             };
+            after_edit {
+                trigger-keys = <LC(C) LC(V) LC(X) RC(C) RC(V) RC(X) LG(C) LG(V) LG(X) RG(C) RG(V) RG(X)>;
+                max-prior-idle-ms = <1500>;
+                strict-modifiers;
+                bindings = <&kp PERIOD>;
+            };
             after_other {
                 trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE ENTER BSPC MINUS COMMA PERIOD SLASH SEMI LANG1 LANG2 LEFT RIGHT UP DOWN PAGE_UP PAGE_DOWN HOME END AK_LAYER_MARK>;
                 max-prior-idle-ms = <1500>;
@@ -216,10 +238,10 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans     &trans     &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans     &trans     &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &mkp MB1   &mkp MB2   &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans     &trans     &trans
             >;
         };
 
