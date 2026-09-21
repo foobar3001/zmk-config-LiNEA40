@@ -57,11 +57,11 @@
     scroller {
         layers = <SCROLL>;
         input-processors =
-            // スクロール用に感度を小さくする,,,,,,,,,,,,
+            // スクロール用に感度を小さくする,,,,,,,,,,,,,,
             <&zip_xy_scaler 1 30>,
-            // スクロール方向を逆転,,,,,,,,,,,,
+            // スクロール方向を逆転,,,,,,,,,,,,,,
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            // マウス移動をスクロールに割り当て,,,,,,,,,,,,
+            // マウス移動をスクロールに割り当て,,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -148,10 +148,10 @@
 
         default_layer {
             bindings = <
-&kp Q     &kp W     &kp E       &kp R    &kp T                                            &kp Y      &kp U  &kp I      &kp O       &kp P
-&kp A     &kp S     &kp D       &kp F    &kp G                                            &kp H      &kp J  &kp K      &kp L       &kp MINUS
-&kp Z     &kp X     &kp C       &kp V    &kp B                                            &kp N      &kp M  &ak_mb1    &ak_mb2     &lt 4 SLASH
-&kp LGUI  &kp LALT  &kp LSHIFT  &kp TAB  &kp LCTRL  &lt 3 SPACE    &mt RIGHT_SHIFT ENTER  &lt 2 TAB         &kp COMMA  &kp PERIOD  &kp SEMI
+&kp Q     &kp W     &kp E       &kp R    &kp T                                            &kp Y      &kp U  &kp I      &kp O        &kp P
+&kp A     &kp S     &kp D       &kp F    &kp G                                            &kp H      &kp J  &kp K      &kp L        &kp MINUS
+&kp Z     &kp X     &kp C       &kp V    &kp B                                            &kp N      &kp M  &ak_mb1    &lt 4 SLASH  &ak_mb2
+&kp LGUI  &kp LALT  &kp LSHIFT  &kp TAB  &kp LCTRL  &lt 3 SPACE    &mt RIGHT_SHIFT ENTER  &lt 2 TAB         &kp COMMA  &kp PERIOD   &kp SEMI
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
