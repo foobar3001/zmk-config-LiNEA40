@@ -93,7 +93,7 @@
             tap-ms = <50>;
         };
 
-        // L: tap は L、hold は SCROLL。次が文字なら tap（連続入力）
+        // J: tap は J、hold は SCROLL。次が文字なら tap（連続入力）
         // hold 対象は文字以外: - MB1 / MB2 親指 , . ;
         lsc: l_scroll {
             compatible = "zmk,behavior-hold-tap";
@@ -162,7 +162,7 @@
         default_layer {
             bindings = <
 &kp Q     &kp W     &kp E       &kp R    &kp T                                            &kp Y      &kp U  &kp I      &kp O        &kp P
-&kp A     &kp S     &kp D       &kp F    &kp G                                            &kp H      &kp J  &kp K      &lsc 4 L     &kp MINUS
+&kp A     &kp S     &kp D       &kp F    &kp G                                            &kp H      &lsc 4 J  &kp K      &kp L        &kp MINUS
 &kp Z     &kp X     &kp C       &kp V    &kp B                                            &kp N      &kp M  &ak_mb1    &ak_mb2      &kp SLASH
 &kp LGUI  &kp LALT  &kp LSHIFT  &kp TAB  &kp LCTRL  &lt 3 SPACE    &mt RIGHT_SHIFT ENTER  &lt 2 TAB         &kp COMMA  &kp PERIOD   &kp SEMI
             >;
