@@ -8,7 +8,7 @@
 |---|---|---|
 | 0 | デフォルト | — |
 | 1 | MOUSE | ボールを動かすと自動。クリック以外のキー、または最後の移動から 1.5s で解除 |
-| 2 | MARK（記号） | 右 TAB ホールド |
+| 2 | MARK（記号） | 右 Enter ホールド |
 | 3 | FUNCTION（移動・IME） | 左 Space ホールド |
 | 4 | SCROLL（ホイール） | J または M ホールド |
 
@@ -16,12 +16,12 @@
 Q  W  E  R  T                      Y  U  I  O  P
 A  S  D  F  G                      H  J* K  L  -
 Z  X  C  V  B                      N  M* MB1† MB2† /
-GUI ALT SFT TAB CTL  SPC[FN]  ENT[SFT] TAB[MARK]  ,  .  ;
+GUI ALT TAB CTL かな[SFT]  SPC[FN]  ENT[MARK]  英数[SFT]  ,  .  ;
 ```
 
-`*` tap は文字、hold は SCROLL。`†` 文脈でクリックか句読点。
+`*` tap は文字、hold は SCROLL。`†` 文脈でクリックか句読点。`[SFT]` は hold が Shift、tap がかな（LANG1）または英数（LANG2）。
 
-修飾は左下の専用キー。右 Enter ホールドが Right Shift。
+左下の GUI / ALT / CTRL は専用キー。MARK は右 Enter ホールド（`&ak_lt` なので入場時に F21）。
 
 ## クリックと句読点（いちばん複雑）
 
