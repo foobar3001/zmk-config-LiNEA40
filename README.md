@@ -16,12 +16,12 @@
 Q  W  E  R  T                      Y  U  I  O  P
 A  S  D  F  G                      H  J* K  L  -
 Z  X  C  V  B                      N  M* MB1† MB2† /
-GUI ALT TAB CTL かな[SFT]  SPC[FN]  ENT[MARK]  英数[SFT]  ,  .  ;
+Cmd Opt Ctrl TAB かな[SFT]  SPC[FN]  ENT[MARK]  英数[SFT]  Ctrl Opt Cmd
 ```
 
 `*` tap は文字、hold は SCROLL。`†` 文脈でクリックか句読点。`[SFT]` は hold が Shift、tap がかな（LANG1）または英数（LANG2）。
 
-左下の GUI / ALT / CTRL は専用キー。MARK は右 Enter ホールド（`&ak_lt` なので入場時に F21）。
+左下の Command / Option / Control と、右下の Control / Option / Command は専用キー。MARK は右 Enter ホールド（`&ak_lt` なので入場時に F21）。
 
 ## クリックと句読点（いちばん複雑）
 
@@ -65,7 +65,9 @@ SCROLL（J/M hold）ではダミーキーを出さない。スクロール中は
 - 打鍵直後 125ms 以内の J/M は即 tap
 - 同じキーの連打（175ms 以内）は tap のまま（`mm` など）
 
-SCROLL 上の文字キーは使わない。MB3/4/5 は記号と親指。`ak_mb1` / `ak_mb2` 位置は `&trans` なので、通常クリックは下のレイヤーに抜ける。
+英字（A–Z）の位置は `hold-trigger-key-positions` に入れない。入れると、その文字へ続く J/M がタップにならず、単語のロールが切れる。SCROLL でホールド直後に押すキーも英字位置には置かない。200ms の単独ホールドのあとでしか届かない。
+
+SCROLL 上の文字キーは使わない。MB3 はレイヤー2（右 Enter）、MB4 は `-`、MB5 は `/`。いずれも記号・親指なので、J/M と同時に押して SCROLL に入れる。`ak_mb1` / `ak_mb2` 位置は `&trans` なので、通常クリックは下のレイヤーに抜ける。
 
 ## 実装上の制約
 
