@@ -16,10 +16,10 @@
 Q  W  E  R  T                      Y  U  I  O  P
 A  S  D  F  G                      H  J* K  L  -
 Z  X  C  V  B                      N  M  MB1† MB2† /
-Cmd Opt Ctrl TAB かな[SFT]  SPC[FN]  ENT[MARK]  英数[SFT]  Ctrl Opt Cmd
+Cmd Opt Ctrl TAB 英数[SFT]  SPC[FN]  ENT[MARK]  かな[SFT]  Ctrl Opt Cmd
 ```
 
-`*` tap は文字、hold は SCROLL。`†` 文脈でクリックか句読点。`[SFT]` は hold が Shift、tap がかな（LANG1）または英数（LANG2）。
+`*` tap は文字、hold は SCROLL。`†` 文脈でクリックか句読点。`[SFT]` は hold が Shift、tap が英数（LANG2）またはかな（LANG1）。
 
 左下の Command / Option / Control と、右下の Control / Option / Command は専用キー。MARK は右 Enter ホールド（`&ak_lt` なので入場時に F21）。
 

@@ -279,7 +279,7 @@
 &kp Q     &kp W     &kp E       &kp R    &kp T                                            &kp Y      &kp U  &kp I      &kp O        &kp P
 &kp A     &kp S     &kp D       &kp F    &kp G                                            &kp H      &lsc 4 J  &kp K      &kp L        &kp MINUS
 &kp Z     &kp X     &kp C       &kp V    &kp B                                            &kp N      &kp M     &mb1_ls    &mb2_ls      &kp SLASH
-&kp LCMD  &kp LOPT  &kp LCTRL   &kp TAB    &mt LSHIFT LANG1  &ak_lt 3 SPACE    &ak_lt 2 ENTER         &mt RIGHT_SHIFT LANG2  &kp RCTRL  &kp ROPT   &kp RCMD
+&kp LCMD  &kp LOPT  &kp LCTRL   &kp TAB    &mt LSHIFT LANG2  &ak_lt 3 SPACE    &ak_lt 2 ENTER         &mt RIGHT_SHIFT LANG1  &kp RCTRL  &kp ROPT   &kp RCMD
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
