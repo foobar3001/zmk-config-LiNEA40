@@ -126,8 +126,8 @@
             tap-ms = <50>;
         };
 
-        // J/M: tap は文字、hold は SCROLL。次が文字・- / なら tap（連続入力）
-        // hold 対象は MB1 / MB2 と親指。英字と - / は入れない
+        // J: tap は文字、hold は SCROLL。次が文字・- / , . なら tap（連続入力）
+        // hold 対象は親指だけ。句読点位置を入れると j, のロールがクリックになる
         // 押下直後から SCROLL を載せる。タップなら層を外してから文字を出す
         lsc: l_scroll {
             compatible = "zmk,behavior-hold-tap";
@@ -138,7 +138,7 @@
             quick-tap-ms = <175>;
             hold-while-undecided;
             bindings = <&mo>, <&kp>;
-            hold-trigger-key-positions = <27 28 30 31 32 33 34 35 36 37 38 39 40>;
+            hold-trigger-key-positions = <30 31 32 33 34 35 36 37 38 39 40>;
         };
 
         // tap は通常キー、hold は MARK/FUNCTION ＋句読点用マーカ
@@ -278,7 +278,7 @@
             bindings = <
 &kp Q     &kp W     &kp E       &kp R    &kp T                                            &kp Y      &kp U  &kp I      &kp O        &kp P
 &kp A     &kp S     &kp D       &kp F    &kp G                                            &kp H      &lsc 4 J  &kp K      &kp L        &kp MINUS
-&kp Z     &kp X     &kp C       &kp V    &kp B                                            &kp N      &lsc 4 M  &mb1_ls    &mb2_ls      &kp SLASH
+&kp Z     &kp X     &kp C       &kp V    &kp B                                            &kp N      &kp M     &mb1_ls    &mb2_ls      &kp SLASH
 &kp LCMD  &kp LOPT  &kp LCTRL   &kp TAB    &mt LSHIFT LANG1  &ak_lt 3 SPACE    &ak_lt 2 ENTER         &mt RIGHT_SHIFT LANG2  &kp RCTRL  &kp ROPT   &kp RCMD
             >;
 

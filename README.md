@@ -10,12 +10,12 @@
 | 1 | MOUSE | ボールを動かすと自動。クリック以外のキー、または最後の移動から 1.5s で解除 |
 | 2 | MARK（記号） | 右 Enter ホールド |
 | 3 | FUNCTION（移動・IME） | 左 Space ホールド |
-| 4 | SCROLL（ホイール） | J または M ホールド |
+| 4 | SCROLL（ホイール） | J ホールド |
 
 ```
 Q  W  E  R  T                      Y  U  I  O  P
 A  S  D  F  G                      H  J* K  L  -
-Z  X  C  V  B                      N  M* MB1† MB2† /
+Z  X  C  V  B                      N  M  MB1† MB2† /
 Cmd Opt Ctrl TAB かな[SFT]  SPC[FN]  ENT[MARK]  英数[SFT]  Ctrl Opt Cmd
 ```
 
@@ -54,19 +54,20 @@ Ctrl / GUI / Alt 付きのその他の文字（Ctrl+S など）は文章操作�
 | 句読点クールタイム | 1.5s | 最後の文章キーから。ボール操作で打ち切り |
 | MOUSE レイヤー | 1.5s | 最後のボール移動から。クリック（位置 27/28）以外のキーでも解除 |
 
-SCROLL（J/M hold）ではダミーキーを出さない。スクロール中はクリックしたいため。
+SCROLL（J hold）ではダミーキーを出さない。スクロール中はクリックしたいため。
 
-## J / M ホールド（SCROLL）
+## J ホールド（SCROLL）
 
-1u ボールは親指ホールドと同時操作しにくいので、ボール隣の J / M で SCROLL に入る。
+1u ボールは親指ホールドと同時操作しにくいので、ボール隣の J で SCROLL に入る。M は通常の文字キー。
 
-- 次が **文字・`-`・`/`** → tap（`j` / `m`、および `j-` / `j/`）。`like` のようなロールで文字が消えないようにする
-- 次が **MB1 / MB2 / 親指**、または 200ms 以上の単独ホールド → SCROLL（ボールがホイール）
-- J/M を押した瞬間から SCROLL に入る（`hold-while-undecided`）。タップに決まると層を外してから文字を出す
-- 打鍵直後 125ms 以内の J/M は即 tap
-- 同じキーの連打（175ms 以内）は tap のまま（`mm` など）
+- 次が **文字・`-`・`/`・`,`・`.`** → tap（`jk` と同じく、J を離しきる前に押しても `j,` / `j.`）。`like` のようなロールで文字が消えないようにする
+- 次が **親指**、または 200ms 以上の単独ホールド → SCROLL（ボールがホイール）
+- J を押した瞬間から SCROLL に入る（`hold-while-undecided`）。タップに決まると層を外してから文字を出す
+- 打鍵直後 125ms 以内の J は即 tap
+- 同じキーの連打（175ms 以内）は tap のまま（`jj` など）
+- SCROLL が 200ms で確定したあとの句読点キーは、これまで通りクリック
 
-英字（A–Z）と `-` `/` の位置は `hold-trigger-key-positions` に入れない。入れると、そのキーへ続く J/M がタップにならず、`j-` や単語のロールが切れる。
+英字（A–Z）と `-` `/` `,` `.` の位置は `hold-trigger-key-positions` に入れない。入れると、そのキーへ続く J がタップにならず、`j,` や単語のロールが切れる。
 
 SCROLL 上で差し替えるのは次だけ。MB3 はレイヤー2（右 Enter）、MB4 は右 Shift、MB5 は右 Cmd。`-` と `/` は透過なので文字のまま出る。右 Shift と右 Cmd はこのレイヤーだけマウスボタンになる。`ak_mb1` / `ak_mb2` 位置は `&trans` なので、通常クリックは下のレイヤーに抜ける。
 
@@ -74,5 +75,5 @@ SCROLL 上で差し替えるのは次だけ。MB3 はレイヤー2（右 Enter�
 
 - adaptive-key の `trigger-keys` は **1 条件あたり 32 個まで**。左右 Shift 付き文字は `after_ls` / `after_rs` に分割している。足すときはこの上限を超えないこと。
 - レイヤー入場のマーカは F21（`AK_LAYER_MARK`）。`dead-keys` でホストには出さない。F15 は macOS で使われうるので使わない。
-- keymap を並べ替えると J/M の `hold-trigger-key-positions`（キー位置番号）がずれる。
+- keymap を並べ替えると J の `hold-trigger-key-positions`（キー位置番号）がずれる。
 - Shift を押したまま句読点キーを叩くと `,` が `<` になる。大文字のあと Shift は離してから。
