@@ -126,8 +126,9 @@
             tap-ms = <50>;
         };
 
-        // J/M: tap は文字、hold は SCROLL。次が文字なら tap（連続入力）
-        // hold 対象は文字以外: - / MB1 / MB2 親指。英字位置は入れない
+        // J/M: tap は文字、hold は SCROLL。次が文字・- / なら tap（連続入力）
+        // hold 対象は MB1 / MB2 と親指。英字と - / は入れない
+        // 押下直後から SCROLL を載せる。タップなら層を外してから文字を出す
         lsc: l_scroll {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -135,8 +136,9 @@
             tapping-term-ms = <200>;
             require-prior-idle-ms = <125>;
             quick-tap-ms = <175>;
+            hold-while-undecided;
             bindings = <&mo>, <&kp>;
-            hold-trigger-key-positions = <19 27 28 29 30 31 32 33 34 35 36 37 38 39 40>;
+            hold-trigger-key-positions = <27 28 30 31 32 33 34 35 36 37 38 39 40>;
         };
 
         // tap は通常キー、hold は MARK/FUNCTION ＋句読点用マーカ
@@ -325,9 +327,9 @@
         SCROLL {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans    &trans    &mkp MB4
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans    &trans    &mkp MB5
-&trans  &trans  &trans  &trans  &trans  &trans    &mkp MB3  &trans          &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &mkp MB3  &mkp MB4        &trans    &trans    &mkp MB5
             >;
         };
 
