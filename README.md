@@ -15,13 +15,35 @@
 ```
 Q  W  E  R  T                      Y  U  I  O  P
 A  S  D  F  G                      H  J* K  L  -
-Z  X  C  V  B                      N  M  MB1† MB2† /
+Z  X  C  V  B                      N  M  MB1† MB2† BS
 Cmd Opt Ctrl TAB 英数[SFT]  SPC[FN]  ENT[MARK]  かな[SFT]  Ctrl Opt Cmd
 ```
 
 `*` tap は文字、hold は SCROLL。`†` 文脈でクリックか句読点。`[SFT]` は hold が Shift、tap が英数（LANG2）またはかな（LANG1）。
 
-左下の Command / Option / Control と、右下の Control / Option / Command は専用キー。MARK は右 Enter ホールド（`&ak_lt` なので入場時に F21）。
+デフォルトでは、左下の Command / Option / Control と、右下の Control / Option / Command は専用キー。MARK は右 Enter ホールド（`&ak_lt` なので入場時に F21）。
+
+## MARK（記号）
+
+右 Enter ホールドで入る。上2段は数字とそのシフト側。`/` と `?` はここだけにある。
+
+```
+1  2  3  4  5                      6  7  8  9  0
+!  @  #  $  %                      ^  &  *  (  )
+/  ?  =  +  ;                      `  '  "  {  }
+\‡ |‡ Ctrl TAB :‡   SPC  ENT[MARK]  ~‡    Ctrl [‡ ]‡
+```
+
+`‡` は tap が記号、hold がデフォルトと同じモディファイア。左から Command、Option、左 Shift、右 Shift、Option、Command。
+
+- モディファイアを押したまま他のキーを押した時点でモディファイアに確定する（`hold-preferred`）。離す順は問わない
+- 他のキーより先にその親指だけを離すと記号。200ms 以上押したままにしても記号は出ず、モディファイアだけになる
+- 記号の直後に次のキーへロールすると、親指を離す前に次が入った時点でモディファイアになる。`\n` のように続けるときは、記号の親指を先に離す
+- Ctrl と Tab は透過で、デフォルトの専用キーのまま
+- Space は素の Space。MARK 中に FUNCTION へは入らない
+- Enter は透過のまま（このキーのホールドが MARK）
+
+FUNCTION（左 Space ホールド）の Enter 親指は素の Enter。Space を押したまま Enter を押しても MARK は乗らない。
 
 ## クリックと句読点（いちばん複雑）
 
@@ -60,16 +82,16 @@ SCROLL（J hold）ではダミーキーを出さない。スクロール中は�
 
 1u ボールは親指ホールドと同時操作しにくいので、ボール隣の J で SCROLL に入る。M は通常の文字キー。
 
-- 次が **文字・`-`・`/`・`,`・`.`** → tap（`jk` と同じく、J を離しきる前に押しても `j,` / `j.`）。`like` のようなロールで文字が消えないようにする
+- 次が **文字・`-`・Backspace・`,`・`.`** → tap（`jk` と同じく、J を離しきる前に押しても `j,` / `j.`）。`like` のようなロールで文字が消えないようにする
 - 次が **親指**、または 200ms 以上の単独ホールド → SCROLL（ボールがホイール）
 - J を押した瞬間から SCROLL に入る（`hold-while-undecided`）。タップに決まると層を外してから文字を出す
 - 打鍵直後 125ms 以内の J は即 tap
 - 同じキーの連打（175ms 以内）は tap のまま（`jj` など）
 - SCROLL が 200ms で確定したあとの句読点キーは、これまで通りクリック
 
-英字（A–Z）と `-` `/` `,` `.` の位置は `hold-trigger-key-positions` に入れない。入れると、そのキーへ続く J がタップにならず、`j,` や単語のロールが切れる。
+英字（A–Z）と `-`、Backspace、`,` `.` の位置は `hold-trigger-key-positions` に入れない。入れると、そのキーへ続く J がタップにならず、`j,` や単語のロールが切れる。
 
-SCROLL 上で差し替えるのは次だけ。MB3 はレイヤー2（右 Enter）、MB4 は右 Shift、MB5 は右 Cmd。`-` と `/` は透過なので文字のまま出る。右 Shift と右 Cmd はこのレイヤーだけマウスボタンになる。`ak_mb1` / `ak_mb2` 位置は `&trans` なので、通常クリックは下のレイヤーに抜ける。
+SCROLL 上で差し替えるのは次だけ。MB3 はレイヤー2（右 Enter）、MB4 は右 Shift、MB5 は右 Cmd。`-` と右下端の Backspace は透過なので、文字と削除のまま出る。右 Shift と右 Cmd はこのレイヤーだけマウスボタンになる。`ak_mb1` / `ak_mb2` 位置は `&trans` なので、通常クリックは下のレイヤーに抜ける。
 
 ## 実装上の制約
 
