@@ -13,6 +13,8 @@
 #define FUNCTION 3
 #define SCROLL 4
 #define AK_LAYER_MARK F21
+// 文章操作のあと、句読点のままにする時間（ms）
+#define AK_PUNCT_IDLE_MS 4000
 
 #define LOPT LALT
 #define ROPT RALT
@@ -150,16 +152,6 @@
             bindings = <&mo_ak>, <&kp>;
         };
 
-        // MARK 層の親指。tap は記号、hold はモディファイア
-        // 他のキーを押した時点でモディファイア。それより先に離せば記号
-        mmt: mark_mod_tap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <200>;
-            bindings = <&kp>, <&kp>;
-        };
-
         // 直前が文字・文章操作（IME/移動/MARK・FUNCTION 入場）なら句読点、それ以外はマウスボタン
         ak_mb1: adaptive_mb1 {
             compatible = "zmk,behavior-adaptive-key";
@@ -169,31 +161,31 @@
 
             after_alpha {
                 trigger-keys = <A B C D E F G H I J K L M N O P Q R S T U V W X Y Z>;
-                max-prior-idle-ms = <1500>;
+                max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
                 strict-modifiers;
                 bindings = <&kp COMMA>;
             };
             after_ls {
                 trigger-keys = <LS(A) LS(B) LS(C) LS(D) LS(E) LS(F) LS(G) LS(H) LS(I) LS(J) LS(K) LS(L) LS(M) LS(N) LS(O) LS(P) LS(Q) LS(R) LS(S) LS(T) LS(U) LS(V) LS(W) LS(X) LS(Y) LS(Z)>;
-                max-prior-idle-ms = <1500>;
+                max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
                 strict-modifiers;
                 bindings = <&kp COMMA>;
             };
             after_rs {
                 trigger-keys = <RS(A) RS(B) RS(C) RS(D) RS(E) RS(F) RS(G) RS(H) RS(I) RS(J) RS(K) RS(L) RS(M) RS(N) RS(O) RS(P) RS(Q) RS(R) RS(S) RS(T) RS(U) RS(V) RS(W) RS(X) RS(Y) RS(Z)>;
-                max-prior-idle-ms = <1500>;
+                max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
                 strict-modifiers;
                 bindings = <&kp COMMA>;
             };
             after_edit {
                 trigger-keys = <LC(C) LC(V) LC(X) RC(C) RC(V) RC(X) LG(C) LG(V) LG(X) RG(C) RG(V) RG(X)>;
-                max-prior-idle-ms = <1500>;
+                max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
                 strict-modifiers;
                 bindings = <&kp COMMA>;
             };
             after_other {
-                trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE ENTER BSPC MINUS COMMA PERIOD SLASH SEMI LANG1 LANG2 LEFT RIGHT UP DOWN PAGE_UP PAGE_DOWN HOME END AK_LAYER_MARK>;
-                max-prior-idle-ms = <1500>;
+                trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE RET BSPC MINUS COMMA DOT FSLH SEMI LANG1 LANG2 LEFT RIGHT UP DOWN PG_UP PG_DN HOME END AK_LAYER_MARK>;
+                max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
                 bindings = <&kp COMMA>;
             };
         };
@@ -206,32 +198,32 @@
 
             after_alpha {
                 trigger-keys = <A B C D E F G H I J K L M N O P Q R S T U V W X Y Z>;
-                max-prior-idle-ms = <1500>;
+                max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
                 strict-modifiers;
-                bindings = <&kp PERIOD>;
+                bindings = <&kp DOT>;
             };
             after_ls {
                 trigger-keys = <LS(A) LS(B) LS(C) LS(D) LS(E) LS(F) LS(G) LS(H) LS(I) LS(J) LS(K) LS(L) LS(M) LS(N) LS(O) LS(P) LS(Q) LS(R) LS(S) LS(T) LS(U) LS(V) LS(W) LS(X) LS(Y) LS(Z)>;
-                max-prior-idle-ms = <1500>;
+                max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
                 strict-modifiers;
-                bindings = <&kp PERIOD>;
+                bindings = <&kp DOT>;
             };
             after_rs {
                 trigger-keys = <RS(A) RS(B) RS(C) RS(D) RS(E) RS(F) RS(G) RS(H) RS(I) RS(J) RS(K) RS(L) RS(M) RS(N) RS(O) RS(P) RS(Q) RS(R) RS(S) RS(T) RS(U) RS(V) RS(W) RS(X) RS(Y) RS(Z)>;
-                max-prior-idle-ms = <1500>;
+                max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
                 strict-modifiers;
-                bindings = <&kp PERIOD>;
+                bindings = <&kp DOT>;
             };
             after_edit {
                 trigger-keys = <LC(C) LC(V) LC(X) RC(C) RC(V) RC(X) LG(C) LG(V) LG(X) RG(C) RG(V) RG(X)>;
-                max-prior-idle-ms = <1500>;
+                max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
                 strict-modifiers;
-                bindings = <&kp PERIOD>;
+                bindings = <&kp DOT>;
             };
             after_other {
-                trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE ENTER BSPC MINUS COMMA PERIOD SLASH SEMI LANG1 LANG2 LEFT RIGHT UP DOWN PAGE_UP PAGE_DOWN HOME END AK_LAYER_MARK>;
-                max-prior-idle-ms = <1500>;
-                bindings = <&kp PERIOD>;
+                trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE RET BSPC MINUS COMMA DOT FSLH SEMI LANG1 LANG2 LEFT RIGHT UP DOWN PG_UP PG_DN HOME END AK_LAYER_MARK>;
+                max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
+                bindings = <&kp DOT>;
             };
         };
 
@@ -253,7 +245,7 @@
         mb2_rs: mb2_rs {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&ak_mb2>, <&kp PERIOD>;
+            bindings = <&ak_mb2>, <&kp DOT>;
             mods = <(MOD_RSFT)>;
             keep-mods = <(MOD_RSFT)>;
         };
@@ -275,7 +267,7 @@
         mb2_aml: mb2_aml {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&mkp MB2>, <&kp PERIOD>;
+            bindings = <&mkp MB2>, <&kp DOT>;
             mods = <(MOD_RSFT)>;
             keep-mods = <(MOD_RSFT)>;
         };
@@ -286,10 +278,10 @@
 
         default_layer {
             bindings = <
-&kp Q           &kp W                    &kp E       &kp R          &kp T                                                 &kp Y                       &kp U          &kp I                 &kp O                 &kp P
-&kp A           &kp S                    &kp D       &kp F          &kp G                                                 &kp H                       &lsc 4 J       &kp K                 &kp L                 &kp MINUS
-&kp Z           &kp X                    &kp C       &kp V          &kp B                                                 &kp N                       &kp M          &mb1_ls               &mb2_ls               &kp BACKSPACE
-&kp LCMD        &kp LOPT                 &kp LCTRL   &kp TAB        &mt LSHIFT LANG2      &ak_lt 3 SPACE  &ak_lt 2 ENTER  &mt RIGHT_SHIFT LANG1                      &kp RCTRL             &kp ROPT              &kp RCMD
+&kp Q     &kp W     &kp E      &kp R    &kp T                                          &kp Y  &kp U     &kp I      &kp O     &kp P
+&kp A     &kp S     &kp D      &kp F    &kp G                                          &kp H  &lsc 4 J  &kp K      &kp L     &kp MINUS
+&kp Z     &kp X     &kp C      &kp V    &kp B                                          &kp N  &kp M     &mb1_ls    &mb2_ls   &kp BSPC
+&kp LCMD  &kp LOPT  &kp LCTRL  &kp TAB  &mt LSHFT LANG2  &ak_lt 3 SPACE  &ak_lt 2 RET  &mt RSHFT LANG1  &kp RCTRL  &kp ROPT  &kp RCMD
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -299,10 +291,10 @@
 
         MOUSE {
             bindings = <
-&trans          &trans                   &trans      &trans         &trans                                                &trans                      &trans         &trans                &trans                &trans
-&trans          &trans                   &trans      &trans         &trans                                                &trans                      &trans         &trans                &trans                &trans
-&trans          &trans                   &trans      &trans         &trans                                                &trans                      &trans         &mb1_aml              &mb2_aml              &trans
-&trans          &trans                   &trans      &trans         &trans                &trans          &trans          &trans                                     &trans                &trans                &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &mb1_aml  &mb2_aml  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans    &trans    &trans
             >;
         };
 
@@ -310,23 +302,23 @@
 
         MARK {
             bindings = <
-&kp N1          &kp N2                   &kp N3      &kp N4         &kp N5                                                &kp N6                      &kp N7         &kp N8                &kp N9                &kp N0
-&kp LS(N1)      &kp LS(N2)               &kp LS(N3)  &kp LS(N4)     &kp LS(N5)                                            &kp LS(NUMBER_6)            &kp LS(N7)     &kp LS(N8)            &kp LS(N9)            &kp LS(N0)
-&kp SLASH       &kp LS(SLASH)            &kp EQUAL   &kp LS(EQUAL)  &kp SEMI                                              &kp GRAVE                   &kp SQT        &kp LS(SINGLE_QUOTE)  &kp LS(LEFT_BRACKET)  &kp LS(RIGHT_BRACKET)
-&mmt LCMD BSLH  &mmt LOPT LS(BACKSLASH)  &trans      &trans         &mmt LSHIFT LS(SEMI)  &kp SPACE       &trans          &mmt RIGHT_SHIFT LS(GRAVE)                 &trans                &mmt ROPT LBKT        &mmt RCMD RBKT
+&kp N1              &kp N2              &kp N3      &kp N4         &kp N5                                  &kp N6      &kp N7       &kp N8      &kp N9              &kp N0
+&kp LS(N1)          &kp LS(N2)          &kp LS(N3)  &kp LS(N4)     &kp LS(N5)                              &kp LS(N6)  &kp LS(N7)   &kp LS(N8)  &kp LS(N9)          &kp LS(N0)
+&kp FSLH            &kp BSLH            &kp EQUAL   &kp LS(EQUAL)  &kp SEMI                                &kp GRAVE   &kp LS(SQT)  &kp SQT     &kp LBKT            &kp RBKT
+&mt LCMD LS(FSLH)   &mt LOPT LS(BSLH)   &trans      &trans         &mt LSHFT LS(SEMI)   &kp SPACE  &trans  &mt RSHFT LS(GRAVE)      &trans      &mt ROPT LS(LBKT)   &mt RCMD LS(RBKT)
             >;
 
-            sensor-bindings = <&re_kp C_VOLUME_DOWN C_VOLUME_UP>;
+            sensor-bindings = <&re_kp C_VOL_DN C_VOL_UP>;
         };
 
         //3
 
         FUNCTION {
             bindings = <
-&kp F1          &kp F2                   &kp F3      &kp F4         &kp F5                                                &kp BACKSPACE               &kp PAGE_UP    &kp HOME              &kp LANG1             &trans
-&kp F6          &kp F7                   &kp F8      &kp F9         &kp F10                                               &kp LEFT                    &kp DOWN       &kp UP                &kp RIGHT             &kp LANG2
-&kp BACKSPACE   &kp DELETE               &kp ESC     &kp F11        &kp F12                                               &kp END                     &kp PAGE_DOWN  &trans                &trans                &trans
-&trans          &trans                   &trans      &trans         &trans                &trans          &kp ENTER       &trans                                     &trans                &trans                &trans
+&kp F1    &kp F2   &kp F3   &kp F4   &kp F5                    &kp BSPC  &kp PG_UP  &kp HOME  &kp LANG1  &trans
+&kp F6    &kp F7   &kp F8   &kp F9   &kp F10                   &kp LEFT  &kp DOWN   &kp UP    &kp RIGHT  &kp LANG2
+&kp BSPC  &kp DEL  &kp ESC  &kp F11  &kp F12                   &kp END   &kp PG_DN  &trans    &trans     &trans
+&trans    &trans   &trans   &trans   &trans   &trans  &kp RET  &trans               &trans    &trans     &trans
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -336,19 +328,19 @@
 
         SCROLL {
             bindings = <
-&trans          &trans                   &trans      &trans         &trans                                                &trans                      &trans         &trans                &trans                &trans
-&trans          &trans                   &trans      &trans         &trans                                                &trans                      &trans         &trans                &trans                &trans
-&trans          &trans                   &trans      &trans         &trans                                                &trans                      &trans         &trans                &trans                &trans
-&trans          &trans                   &trans      &trans         &trans                &trans          &mkp MB3        &mkp MB4                                   &trans                &trans                &mkp MB5
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &mkp MB3  &mkp MB4        &trans  &trans  &mkp MB5
             >;
         };
 
         layer_5 {
             bindings = <
-&trans          &trans                   &trans      &trans         &trans                                                &trans                      &trans         &trans                &trans                &trans
-&trans          &trans                   &trans      &trans         &trans                                                &trans                      &trans         &trans                &trans                &trans
-&trans          &trans                   &trans      &trans         &trans                                                &trans                      &trans         &trans                &trans                &trans
-&trans          &trans                   &trans      &trans         &trans                &trans          &trans          &trans                                     &trans                &trans                &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans
             >;
         };
 
