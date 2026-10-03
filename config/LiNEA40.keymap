@@ -145,7 +145,7 @@
 
         // { } は連続入力が多いため、ほぼ同時押しでも修飾ではなくお互いのタップにする。
         // ZMKでは「このキーは連続入力」は直接指定できないので、
-        // hold-trigger-key-positions は修飾にする相手キーなので、{ }（位置 39 40）を外して書く。
+        // hold-trigger-key-positions は修飾にする相手キーなので、{ }（左Cmd/左Opt、位置 30 31）を外して書く。
         mt_brace: mt_brace {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -156,7 +156,7 @@
                 0 1 2 3 4 5 6 7 8 9
                 10 11 12 13 14 15 16 17 18 19
                 20 21 22 23 24 25 26 27 28 29
-                30 31 32 33 34 35 36 37 38
+                32 33 34 35 36 37 38 39 40
             >;
         };
 
@@ -319,10 +319,10 @@
 
         MARK {
             bindings = <
-&kp N1              &kp N2              &kp N3      &kp N4         &kp N5                                  &kp N6      &kp N7       &kp N8      &kp N9              &kp N0
-&kp LS(N1)          &kp LS(N2)          &kp LS(N3)  &kp LS(N4)     &kp LS(N5)                              &kp LS(N6)  &kp LS(N7)   &kp LS(N8)  &kp LS(N9)          &kp LS(N0)
-&kp FSLH            &kp BSLH            &kp EQUAL   &kp LS(EQUAL)  &kp SEMI                                &kp GRAVE   &kp LS(SQT)  &kp SQT     &kp LBKT            &kp RBKT
-&mt LCMD LS(FSLH)   &mt LOPT LS(BSLH)   &trans      &trans         &mt LSHFT LS(SEMI)   &kp SPACE  &trans  &mt RSHFT LS(GRAVE)      &trans      &mt_brace ROPT LS(LBKT)   &mt_brace RCMD LS(RBKT)
+&kp N1                   &kp N2                   &kp N3      &kp N4         &kp N5                                 &kp N6               &kp N7       &kp N8      &kp N9             &kp N0
+&kp LS(N1)               &kp LS(N2)               &kp LS(N3)  &kp LS(N4)     &kp LS(N5)                             &kp LS(N6)           &kp LS(N7)   &kp LS(N8)  &kp LS(N9)         &kp LS(N0)
+&kp LBKT                 &kp RBKT                 &kp EQUAL   &kp LS(EQUAL)  &kp SEMI                               &kp GRAVE            &kp LS(SQT)  &kp SQT     &kp BSLH           &kp FSLH
+&mt_brace LCMD LS(LBKT)  &mt_brace LOPT LS(RBKT)  &trans      &trans         &mt LSHFT LS(SEMI)  &kp SPACE  &trans  &mt RSHFT LS(GRAVE)               &trans      &mt ROPT LS(BSLH)  &mt RCMD LS(FSLH)
             >;
 
             sensor-bindings = <&re_kp C_VOL_DN C_VOL_UP>;

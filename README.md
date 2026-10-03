@@ -28,10 +28,10 @@ Cmd Opt Ctrl TAB 英数[SFT]  SPC[FN]  ENT[MARK]  かな[SFT]  Ctrl Opt Cmd
 右 Enter ホールドで入る。上2段は数字とそのシフト側。`/` と `?` はここだけにある。
 
 ```
-1  2  3  4  5                      6  7  8  9  0
-!  @  #  $  %                      ^  &  *  (  )
-/  \  =  +  ;                      `  "  '  [  ]
-?‡ |‡ Ctrl TAB :‡   SPC  ENT[MARK]  ~‡    Ctrl {‡ }‡
+1   2   3     4    5                   6   7  8     9   0
+!   @   #     $    %                   ^   &  *     (   )
+[   ]   =     +    ;                   `   "  '     \   /
+{‡  }‡  Ctrl  TAB  :‡  SPC  ENT[MARK]  ~‡     Ctrl  |‡  ?‡
 ```
 
 `‡` は tap が記号、hold がデフォルトと同じモディファイア。左から Command、Option、左 Shift、右 Shift、Option、Command。
