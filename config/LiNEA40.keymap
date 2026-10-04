@@ -244,13 +244,13 @@
             };
         };
 
-        // 左Shiftはクリック（ドラッグ）、右Shiftは < >
+        // 左Shiftはクリック（ドラッグ）。右Shiftは < >、右Cmdは , .
         mb1_rs: mb1_rs {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&ak_mb1>, <&kp COMMA>;
-            mods = <(MOD_RSFT)>;
-            keep-mods = <(MOD_RSFT)>;
+            mods = <(MOD_RSFT|MOD_RGUI)>;
+            keep-mods = <(MOD_RSFT|MOD_RGUI)>;
         };
         mb1_ls: mb1_ls {
             compatible = "zmk,behavior-mod-morph";
@@ -263,8 +263,8 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&ak_mb2>, <&kp DOT>;
-            mods = <(MOD_RSFT)>;
-            keep-mods = <(MOD_RSFT)>;
+            mods = <(MOD_RSFT|MOD_RGUI)>;
+            keep-mods = <(MOD_RSFT|MOD_RGUI)>;
         };
         mb2_ls: mb2_ls {
             compatible = "zmk,behavior-mod-morph";
@@ -273,20 +273,20 @@
             mods = <(MOD_LSFT)>;
             keep-mods = <(MOD_LSFT)>;
         };
-        // AML 中は句読点判定を使わず、右Shiftだけ < > にする
+        // AML 中は句読点判定を使わず、右Shiftは < >、右Cmdは , . にする
         mb1_aml: mb1_aml {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&mkp MB1>, <&kp COMMA>;
-            mods = <(MOD_RSFT)>;
-            keep-mods = <(MOD_RSFT)>;
+            mods = <(MOD_RSFT|MOD_RGUI)>;
+            keep-mods = <(MOD_RSFT|MOD_RGUI)>;
         };
         mb2_aml: mb2_aml {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&mkp MB2>, <&kp DOT>;
-            mods = <(MOD_RSFT)>;
-            keep-mods = <(MOD_RSFT)>;
+            mods = <(MOD_RSFT|MOD_RGUI)>;
+            keep-mods = <(MOD_RSFT|MOD_RGUI)>;
         };
     };
 
