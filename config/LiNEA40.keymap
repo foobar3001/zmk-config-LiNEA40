@@ -13,6 +13,7 @@
 #define MARK 2
 #define FUNCTION 3
 #define SCROLL 4
+#define META 5
 #define AK_LAYER_MARK F21
 // 文章操作のあと、句読点のままにする時間（ms）
 #define AK_PUNCT_IDLE_MS 4000
@@ -333,9 +334,9 @@
 
         FUNCTION {
             bindings = <
-&kp F1    &kp F2   &kp F3   &kp F4   &kp F5                    &kp BSPC  &kp PG_UP  &kp HOME  &kp LANG1  &trans
+&kp F1    &kp F2   &kp F3   &kp F4   &kp F5                    &kp BSPC  &kp PG_UP  &kp HOME  &kp LANG1  &lt META P
 &kp F6    &kp F7   &kp F8   &kp F9   &kp F10                   &kp LEFT  &kp DOWN   &kp UP    &kp RIGHT  &kp LANG2
-&kp BSPC  &kp DEL  &kp ESC  &kp F11  &kp F12                   &kp END   &kp PG_DN  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_CLR
+&kp BSPC  &kp DEL  &kp ESC  &kp F11  &kp F12                   &kp END   &kp PG_DN  &trans    &trans    &trans
 &trans    &trans   &trans   &trans   &trans   &trans  &kp RET  &trans               &trans    &trans     &trans
             >;
 
@@ -353,16 +354,15 @@
             >;
         };
 
-        layer_5 {
+        //5  Bluetooth。FUNCTION の P をホールドして入る
+
+        META {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans
+&bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4                    &bt BT_PRV  &bt BT_NXT  &trans  &trans  &trans
+&bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4                   &trans      &trans      &trans  &trans  &trans
+&trans         &trans         &trans         &trans         &trans                          &trans      &trans      &trans  &bt BT_CLR  &bt BT_CLR_ALL
+&trans         &trans         &trans         &trans         &trans        &trans  &trans    &trans                  &trans  &trans  &trans
             >;
         };
-
-        //5
-        //6
     };
 };

@@ -11,6 +11,7 @@
 | 2 | MARK（記号） | 右 Enter ホールド |
 | 3 | FUNCTION（移動・IME） | 左 Space ホールド |
 | 4 | SCROLL（ホイール） | J ホールド |
+| 5 | META（Bluetooth） | FUNCTION の P をホールド（タップは P） |
 
 ```
 Q  W  E  R  T                      Y  U  I  O  P
@@ -43,7 +44,23 @@ Cmd Opt Ctrl TAB 英数[SFT]  SPC[FN]  ENT[MARK]  かな[SFT]  Ctrl Opt Cmd
 - Space は素の Space。MARK 中に FUNCTION へは入らない
 - Enter は透過のまま（このキーのホールドが MARK）
 
-FUNCTION（左 Space ホールド）の Enter 親指は素の Enter。Space を押したまま Enter を押しても MARK は乗らない。
+FUNCTION（左 Space ホールド）の Enter 親指は素の Enter。Space を押したまま Enter を押しても MARK は乗らない。FUNCTION の P はタップが P、ホールドが META。
+
+## META（Bluetooth）
+
+Space を押したまま P をホールドして入る。スプリットの初期設定でホスト用プロファイルは 5 つ（0–4）。
+
+```
+0    1    2    3    4                 前   次
+切0  切1  切2  切3  切4
+                                        解除  全解除
+```
+
+- 上段左（Q–T）はプロファイル選択 `BT_SEL 0`–`4`
+- 中段左（A–G）は、その番号の非アクティブ接続を切る `BT_DISC`
+- 上段右の Y / U は前 / 次のプロファイル
+- `.` は現在のプロファイルのペアリング解除（`BT_CLR`）
+- 右端の Backspace は全プロファイル解除（`BT_CLR_ALL`）
 
 ## クリックと句読点（いちばん複雑）
 
