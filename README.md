@@ -11,7 +11,7 @@
 | 2 | MARK（記号） | 右 Enter ホールド |
 | 3 | FUNCTION（移動・IME） | 左 Space ホールド |
 | 4 | SCROLL（ホイール） | J ホールド |
-| 5 | META（Bluetooth） | FUNCTION の P をホールド（タップは P） |
+| 5 | META（Bluetooth） | FUNCTION の P を押している間 |
 
 ```
 Q  W  E  R  T                      Y  U  I  O  P
@@ -44,7 +44,7 @@ Cmd Opt Ctrl TAB 英数[SFT]  SPC[FN]  ENT[MARK]  かな[SFT]  Ctrl Opt Cmd
 - Space は素の Space。MARK 中に FUNCTION へは入らない
 - Enter は透過のまま（このキーのホールドが MARK）
 
-FUNCTION（左 Space ホールド）の Enter 親指は素の Enter。Space を押したまま Enter を押しても MARK は乗らない。FUNCTION の P はタップが P、ホールドが META。
+FUNCTION（左 Space ホールド）の Enter 親指は素の Enter。Space を押したまま Enter を押しても MARK は乗らない。FUNCTION の P は押している間 META で、P は出ない。
 
 ## META（Bluetooth）
 
