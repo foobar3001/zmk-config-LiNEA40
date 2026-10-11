@@ -30,11 +30,11 @@ $(TARGET_RIGHT): $(SRCS_RIGHT)
 	docker exec -w /workspaces/zmk/app -it $(container_name) cp build/right/zephyr/zmk.uf2 build/LiNEA40_right.uf2
 
 $(TARGET_PAIR2_LEFT): $(SRCS_LEFT) $(PAIR2_SRCS)
-	docker exec -w /workspaces/zmk/app -it $(container_name) west build -d build/pair2/left -b seeeduino_xiao_ble -- -DSHIELD=LiNEA40_left -DZMK_CONFIG="/workspaces/zmk-config/config" -DZMK_EXTRA_MODULES="$(PAIR2_MODULES)" -DCONFIG_LINEA40_PAIR2=y -DCONFIG_ZMK_KEYBOARD_NAME=LiNEA40-2
+	docker exec -w /workspaces/zmk/app -it $(container_name) west build -d build/pair2/left -b seeeduino_xiao_ble -- -DSHIELD=LiNEA40_left -DZMK_CONFIG="/workspaces/zmk-config/config" -DZMK_EXTRA_MODULES="$(PAIR2_MODULES)" -DCONFIG_LINEA40_PAIR2=y
 	docker exec -w /workspaces/zmk/app -it $(container_name) cp build/pair2/left/zephyr/zmk.uf2 build/LiNEA40_pair2_left.uf2
 
 $(TARGET_PAIR2_RIGHT): $(SRCS_RIGHT) $(PAIR2_SRCS)
-	docker exec -w /workspaces/zmk/app -it $(container_name) west build -d build/pair2/right -b seeeduino_xiao_ble -S studio-rpc-usb-uart -S zmk-usb-logging -- -DSHIELD=LiNEA40_right -DZMK_CONFIG="/workspaces/zmk-config/config" -DZMK_EXTRA_MODULES="$(PAIR2_MODULES)" -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_STUDIO_LOCKING=n -DCONFIG_LINEA40_PAIR2=y -DCONFIG_ZMK_KEYBOARD_NAME=LiNEA40-2
+	docker exec -w /workspaces/zmk/app -it $(container_name) west build -d build/pair2/right -b seeeduino_xiao_ble -S studio-rpc-usb-uart -S zmk-usb-logging -- -DSHIELD=LiNEA40_right -DZMK_CONFIG="/workspaces/zmk-config/config" -DZMK_EXTRA_MODULES="$(PAIR2_MODULES)" -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_STUDIO_LOCKING=n -DCONFIG_LINEA40_PAIR2=y
 	docker exec -w /workspaces/zmk/app -it $(container_name) cp build/pair2/right/zephyr/zmk.uf2 build/LiNEA40_pair2_right.uf2
 
 clean:

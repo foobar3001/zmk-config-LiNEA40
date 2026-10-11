@@ -1,9 +1,0 @@
-# Second physical LiNEA40. Enables a split service UUID that the default
-# firmware does not scan for, so the two pairs do not bond to each other.
-
-config LINEA40_PAIR2
-	bool "Distinct split identity for a second LiNEA40"
-	help
-	  Build both halves of the second pair with this enabled. The central
-	  also needs CONFIG_ZMK_KEYBOARD_NAME="LiNEA40-2" so hosts can tell the
-	  pairs apart. Leave this off for the first pair.

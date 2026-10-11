@@ -1,5 +1,12 @@
+config LINEA40_PAIR2
+    bool "Distinct split identity for a second LiNEA40"
+    help
+      Build both halves of a second LiNEA40 with this enabled. The right
+      half is named LiNEA40-2 so hosts can tell the pairs apart.
+
 if SHIELD_LiNEA40_RIGHT
     config ZMK_KEYBOARD_NAME
+        default "LiNEA40-2" if LINEA40_PAIR2
         default "LiNEA40"
     config ZMK_SPLIT_ROLE_CENTRAL
         default y
