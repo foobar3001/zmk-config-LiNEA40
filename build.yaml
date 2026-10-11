@@ -15,5 +15,16 @@ include:
     shield: LiNEA40_right rgbled_adapter
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
+  # Second pair. Same keymap, different split UUID and host name (LiNEA40-2).
+  # Flash both halves from these artifacts. settings_reset below is shared.
+  - board: seeeduino_xiao_ble
+    shield: LiNEA40_left rgbled_adapter
+    cmake-args: -DCONFIG_LINEA40_PAIR2=y -DCONFIG_ZMK_KEYBOARD_NAME=LiNEA40-2
+    artifact-name: LiNEA40_pair2_left
+  - board: seeeduino_xiao_ble
+    shield: LiNEA40_right rgbled_adapter
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_LINEA40_PAIR2=y -DCONFIG_ZMK_KEYBOARD_NAME=LiNEA40-2
+    artifact-name: LiNEA40_pair2_right
   - board: seeeduino_xiao_ble
     shield: settings_reset

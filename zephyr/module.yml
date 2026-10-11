@@ -1,0 +1,4 @@
+name: linea40
+build:
+  cmake: pair2
+  kconfig: pair2/Kconfig
