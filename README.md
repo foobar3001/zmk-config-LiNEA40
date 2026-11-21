@@ -20,7 +20,7 @@ Z  X  C  V  B                      N  M  MB1† MB2† BS
 Cmd Opt Ctrl TAB 英数[SFT]  SPC[FN]  ENT[MARK]  かな[SFT]  Ctrl Opt Cmd
 ```
 
-`*` tap は文字、hold は SCROLL。`†` 文脈でクリックか句読点。`[SFT]` は hold が Shift、tap が英数（LANG2）またはかな（LANG1）。
+`*` tap は文字、hold は SCROLL。`†` 文脈でクリックか句読点。`[SFT]` は hold が Shift、tap が英数（F18）またはかな（F19）。
 
 デフォルトでは、左下の Command / Option / Control と、右下の Control / Option / Command は専用キー。MARK は右 Enter ホールド（`&ak_lt` なので入場時に F21）。
 
@@ -79,7 +79,7 @@ Space を押したまま P をホールドして入る。スプリットの初�
 
 - 修飾なしの A–Z、および左右 Shift 付きの A–Z（`OK` など）
 - 数字、Space、Enter、BS、一部記号
-- LANG1 / LANG2（英数・かな）
+- F18 / F19（英数・かな）
 - 矢印、Page Up/Down、Home、End
 - MARK（layer 2）または FUNCTION（layer 3）に **入ったこと**（内部だけ F21 を出し、ホストには送らない）
 - Ctrl/Cmd + C / V / X（コピー・ペースト・カット）
@@ -113,6 +113,6 @@ SCROLL 上で差し替えるのは次だけ。MB3 はレイヤー2（右 Enter�
 ## 実装上の制約
 
 - adaptive-key の `trigger-keys` は **1 条件あたり 32 個まで**。左右 Shift 付き文字は `after_ls` / `after_rs` に分割している。足すときはこの上限を超えないこと。
-- レイヤー入場のマーカは F21（`AK_LAYER_MARK`）。`dead-keys` でホストには出さない。F15 は macOS で使われうるので使わない。
+- レイヤー入場のマーカは F21（`AK_LAYER_MARK`）。`dead-keys` でホストには出さない。英数は F18、かなは F19。F15 は macOS で使われうるので使わない。
 - keymap を並べ替えると J の `hold-trigger-key-positions`（キー位置番号）がずれる。
 - Shift を押したまま句読点キーを叩くと `,` が `<` になる。大文字のあと Shift は離してから。
