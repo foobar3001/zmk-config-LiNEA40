@@ -15,7 +15,7 @@
 #define SCROLL 4
 #define META 5
 #define AK_LAYER_MARK F21
-// 英数は右Ctrl+右Opt+U、かなは右Ctrl+右Opt+I。F13以降は iPad の Jump が別のFキーにする。
+// 英数は右Ctrl+;、かなは右Ctrl+Shift+J。入力メニューのショートカットをそのまま送る。
 // 文章操作のあと、句読点のままにする時間（ms）
 #define AK_PUNCT_IDLE_MS 4000
 
@@ -204,7 +204,7 @@
                 bindings = <&kp COMMA>;
             };
             after_other {
-                trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE RET BSPC MINUS COMMA DOT FSLH SEMI RC(RA(U)) RC(RA(I)) LEFT RIGHT UP DOWN PG_UP PG_DN HOME END AK_LAYER_MARK>;
+                trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE RET BSPC MINUS COMMA DOT FSLH SEMI RC(SEMI) RC(LS(J)) LEFT RIGHT UP DOWN PG_UP PG_DN HOME END AK_LAYER_MARK>;
                 max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
                 bindings = <&kp COMMA>;
             };
@@ -241,7 +241,7 @@
                 bindings = <&kp DOT>;
             };
             after_other {
-                trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE RET BSPC MINUS COMMA DOT FSLH SEMI RC(RA(U)) RC(RA(I)) LEFT RIGHT UP DOWN PG_UP PG_DN HOME END AK_LAYER_MARK>;
+                trigger-keys = <N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 SPACE RET BSPC MINUS COMMA DOT FSLH SEMI RC(SEMI) RC(LS(J)) LEFT RIGHT UP DOWN PG_UP PG_DN HOME END AK_LAYER_MARK>;
                 max-prior-idle-ms = <AK_PUNCT_IDLE_MS>;
                 bindings = <&kp DOT>;
             };
@@ -301,7 +301,7 @@
 &kp Q     &kp W     &kp E      &kp R    &kp T                                          &kp Y  &kp U     &kp I      &kp O     &kp P
 &kp A     &kp S     &kp D      &kp F    &kp G                                          &kp H  &lsc 4 J  &kp K      &kp L     &kp MINUS
 &kp Z     &kp X     &kp C      &kp V    &kp B                                          &kp N  &kp M     &mb1_ls    &mb2_ls   &kp BSPC
-&kp LCMD  &kp LOPT  &kp LCTRL  &kp TAB  &mt LSHFT RC(RA(U))  &ak_lt 3 SPACE  &ak_lt 2 RET  &mt RSHFT RC(RA(I))  &kp RCTRL  &kp ROPT  &kp RCMD
+&kp LCMD  &kp LOPT  &kp LCTRL  &kp TAB  &mt LSHFT RC(SEMI)  &ak_lt 3 SPACE  &ak_lt 2 RET  &mt RSHFT RC(LS(J))  &kp RCTRL  &kp ROPT  &kp RCMD
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -335,8 +335,8 @@
 
         FUNCTION {
             bindings = <
-&kp F1    &kp F2   &kp F3   &kp F4   &kp F5                    &kp BSPC  &kp PG_UP  &kp HOME  &kp RC(RA(I))  &mo META
-&kp F6    &kp F7   &kp F8   &kp F9   &kp F10                   &kp LEFT  &kp DOWN   &kp UP    &kp RIGHT  &kp RC(RA(U))
+&kp F1    &kp F2   &kp F3   &kp F4   &kp F5                    &kp BSPC  &kp PG_UP  &kp HOME  &kp RC(LS(J))  &mo META
+&kp F6    &kp F7   &kp F8   &kp F9   &kp F10                   &kp LEFT  &kp DOWN   &kp UP    &kp RIGHT  &kp RC(SEMI)
 &kp BSPC  &kp DEL  &kp ESC  &kp F11  &kp F12                   &kp END   &kp PG_DN  &trans    &trans    &trans
 &trans    &trans   &trans   &trans   &trans   &trans  &kp RET  &trans               &trans    &trans     &trans
             >;
