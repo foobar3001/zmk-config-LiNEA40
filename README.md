@@ -6,12 +6,14 @@
 
 | 番号 | 名前 | 入り方 |
 |---|---|---|
-| 0 | デフォルト | — |
-| 1 | MOUSE | ボールを動かすと自動。クリック以外のキー、または最後の移動から 1.5s で解除 |
-| 2 | MARK（記号） | 右 Enter ホールド |
-| 3 | FUNCTION（移動・IME） | 左 Space ホールド |
-| 4 | SCROLL（ホイール） | J ホールド |
-| 5 | META（Bluetooth） | FUNCTION の P を押している間 |
+| 0 | デフォルト（DIRECT、直接接続） | 起動時。プロファイル0でもここへ戻る。英数は LANG2、かなは LANG1 |
+| 1 | REMOTE | プロファイル1（リモート接続）。英数は右Ctrl+Shift+;、かなは右Ctrl+Shift+J |
+| 2 | MOUSE | ボールを動かすと自動。クリック以外のキー、または最後の移動から 1.5s で解除 |
+| 3 | MARK（記号） | 右 Enter ホールド |
+| 4 | FUNCTION（移動・IME） | 左 Space ホールド。プロファイル1（リモート接続）のとき |
+| 5 | FUNCTION_DIRECT | 左 Space ホールド。プロファイル0（直接接続）のとき。英数は LANG2、かなは LANG1 |
+| 6 | SCROLL（ホイール） | J ホールド |
+| 7 | META（Bluetooth） | FUNCTION の P を押している間 |
 
 ```
 Q  W  E  R  T                      Y  U  I  O  P
@@ -20,7 +22,7 @@ Z  X  C  V  B                      N  M  MB1† MB2† BS
 Cmd Opt Ctrl TAB 英数[SFT]  SPC[FN]  ENT[MARK]  かな[SFT]  Ctrl Opt Cmd
 ```
 
-`*` tap は文字、hold は SCROLL。`†` 文脈でクリックか句読点。`[SFT]` は hold が Shift、tap が英数（右Ctrl+Shift+;）またはかな（右Ctrl+Shift+J）。
+`*` tap は文字、hold は SCROLL。`†` 文脈でクリックか句読点。`[SFT]` は hold が Shift。tap は、プロファイル0（直接接続）では英数（LANG2）とかな（LANG1）、プロファイル1（リモート接続）では英数（右Ctrl+Shift+;）とかな（右Ctrl+Shift+J）。
 
 デフォルトでは、左下の Command / Option / Control と、右下の Control / Option / Command は専用キー。MARK は右 Enter ホールド（`&ak_lt` なので入場時に F21）。
 
@@ -56,7 +58,8 @@ Space を押したまま P をホールドして入る。スプリットの初�
                                         解除  全解除
 ```
 
-- 上段左（Q–T）はプロファイル選択 `BT_SEL 0`–`4`
+- 上段左（Q–T）はプロファイル選択。`0` は直接接続（英数 LANG2、かな LANG1）、`1` はリモート接続（右Ctrl+Shift+; / 右Ctrl+Shift+J）。`2` `3` `4` は接続先だけで、英数・かなの形式は変えない
+- 起動直後は直接接続。リモート接続で使うときは `1` を一度押す。`前` / `次` でも形式は変わらない
 - 中段左（A–G）は、その番号の非アクティブ接続を切る `BT_DISC`
 - 上段右の Y / U は前 / 次のプロファイル
 - `.` は現在のプロファイルのペアリング解除（`BT_CLR`）
@@ -79,7 +82,7 @@ Space を押したまま P をホールドして入る。スプリットの初�
 
 - 修飾なしの A–Z、および左右 Shift 付きの A–Z（`OK` など）
 - 数字、Space、Enter、BS、一部記号
-- 右Ctrl+Shift+; / 右Ctrl+Shift+J（英数・かな）
+- 右Ctrl+Shift+; / 右Ctrl+Shift+J（英数・かな。プロファイル1、リモート接続）、および LANG1 / LANG2（プロファイル0、直接接続）
 - 矢印、Page Up/Down、Home、End
 - MARK（layer 2）または FUNCTION（layer 3）に **入ったこと**（内部だけ F21 を出し、ホストには送らない）
 - Ctrl/Cmd + C / V / X（コピー・ペースト・カット）
@@ -113,6 +116,6 @@ SCROLL 上で差し替えるのは次だけ。MB3 はレイヤー2（右 Enter�
 ## 実装上の制約
 
 - adaptive-key の `trigger-keys` は **1 条件あたり 32 個まで**。左右 Shift 付き文字は `after_ls` / `after_rs` に分割している。足すときはこの上限を超えないこと。
-- レイヤー入場のマーカは F21（`AK_LAYER_MARK`）。`dead-keys` でホストには出さない。英数は右Ctrl+Shift+;、かなは右Ctrl+Shift+J。F15 は macOS で使われうるので使わない。
+- レイヤー入場のマーカは F21（`AK_LAYER_MARK`）。`dead-keys` でホストには出さない。プロファイル1（リモート接続）の英数は右Ctrl+Shift+;、かなは右Ctrl+Shift+J。プロファイル0（直接接続）は LANG2 と LANG1。F15 は macOS で使われうるので使わない。
 - keymap を並べ替えると J の `hold-trigger-key-positions`（キー位置番号）がずれる。
 - Shift を押したまま句読点キーを叩くと `,` が `<` になる。大文字のあと Shift は離してから。
