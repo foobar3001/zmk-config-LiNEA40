@@ -16,6 +16,7 @@
 #define FUNCTION_DIRECT 5
 #define SCROLL 6
 #define META 7
+#define SCROLL_REMOTE 8
 #define AK_LAYER_MARK F21
 // 起動時は直接接続。英数は LANG2、かなは LANG1。
 // プロファイル1（リモート接続）で REMOTE 層を足すと右Ctrl+Shift+; と右Ctrl+Shift+J。
@@ -85,6 +86,15 @@
             // スクロール方向を逆転,,,,,,,,,,,,,,
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
             // マウス移動をスクロールに割り当て,,,,,,,,,,,,,,
+            <&zip_xy_to_scroll_mapper>;
+    };
+
+    // プロファイル1のホイール。縦は直接接続と逆、速度は半分（1/60）
+    remote_scroller {
+        layers = <SCROLL_REMOTE>;
+        input-processors =
+            <&zip_ak_mouse MOUSE 1500>,
+            <&zip_xy_scaler 1 60>,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -339,7 +349,7 @@
         REMOTE {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                                          &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                                          &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                                          &trans  &lsc SCROLL_REMOTE J  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                                          &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &mt LSHFT RC(LS(SEMI))  &ak_lt FUNCTION SPACE  &trans  &mt RSHFT RC(LS(J))  &trans  &trans  &trans
             >;
@@ -413,6 +423,17 @@
 &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4                   &trans      &trans      &trans  &trans  &trans
 &trans         &trans         &trans         &trans         &trans                          &trans      &trans      &trans  &bt BT_CLR  &bt BT_CLR_ALL
 &trans         &trans         &trans         &trans         &trans        &trans  &trans    &trans                  &trans  &trans  &trans
+            >;
+        };
+
+        //8  プロファイル1のホイール。向きは直接接続と逆、速度は半分（1/60）
+
+        SCROLL_REMOTE {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &mkp MB3  &mkp MB4        &trans  &trans  &mkp MB5
             >;
         };
     };
