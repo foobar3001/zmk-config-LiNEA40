@@ -58,10 +58,10 @@
         spi-max-frequency = <2000000>;
         irq-gpios = <&xiao_d 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; //MOT-D6
         automouse-layer = <0>;
-        // キーマップの層番号と揃える。2 は MOUSE、5 は FUNCTION_DIRECT になった。
+        // キーマップの層番号と揃える。Mac/Windows 両方。
         // ここが古い番号のままだと、ボールを動かした瞬間に低速（snipe）になる。
-        snipe-layers = <3>; // MARK
-        scroll-layers = <7>; // META
+        snipe-layers = <3 13>; // MARK WIN_MARK
+        scroll-layers = <6 16 8>; // SCROLL WIN_SCROLL SCROLL_REMOTE
     };
 };
 

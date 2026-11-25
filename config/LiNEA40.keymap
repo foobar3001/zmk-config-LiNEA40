@@ -9,6 +9,7 @@
 #include <dt-bindings/zmk/modifiers.h>
 #include <dt-bindings/zmk/pointing.h>
 
+// 0–8 Mac。10–17 Windows（下一桁が Mac と同じ。REMOTE / Jump Desktop 相当は空けておく）
 #define REMOTE 1
 #define MOUSE 2
 #define MARK 3
@@ -17,9 +18,20 @@
 #define SCROLL 6
 #define META 7
 #define SCROLL_REMOTE 8
+// 9 は番号合わせの空き
+#define WINDOWS 10
+// 11 は REMOTE 相当の空き（Jump Desktop は Windows に無い）
+#define WIN_MOUSE 12
+#define WIN_MARK 13
+// 14 は FUNCTION 相当の空き（Jump Desktop 用 FUNCTION は Windows に無い）
+#define WIN_FUNCTION_DIRECT 15
+#define WIN_SCROLL 16
+#define WIN_META 17
 #define AK_LAYER_MARK F21
-// 起動時は直接接続。英数は LANG2、かなは LANG1。
-// プロファイル1（リモート接続）で REMOTE 層を足すと右Ctrl+Shift+; と右Ctrl+Shift+J。
+// 起動時は Mac（直接接続）。英数は LANG2、かなは LANG1。再起動でも Mac に戻る。
+// META / WIN_META の X で WINDOWS を基本レイヤーにする。Cmd→Ctrl、Opt→Win、Ctrl→Alt。Z で Mac に戻す。
+// REMOTE は Mac の Jump Desktop 専用。英数は右Ctrl+Shift+;、かなは右Ctrl+Shift+J。Windows では乗せない。
+// ボールは常に MOUSE を足す。Windows 基本のときは conditional で WIN_MOUSE に載せ替える。
 // 文章操作のあと、句読点のままにする時間（ms）
 #define AK_PUNCT_IDLE_MS 4000
 
@@ -69,7 +81,7 @@
 
 &msc_input_listener {
     speed_up {
-        layers = <FUNCTION FUNCTION_DIRECT>;
+        layers = <FUNCTION FUNCTION_DIRECT WIN_FUNCTION_DIRECT>;
         input-processors = <&zip_wheel_scaler 3 1>; //スクロールを3倍速にする
     };
 };
@@ -78,7 +90,7 @@
     input-processors = <&zip_ak_mouse MOUSE 1500>;
 
     scroller {
-        layers = <SCROLL>;
+        layers = <SCROLL WIN_SCROLL>;
         input-processors =
             <&zip_ak_mouse MOUSE 1500>,
             // スクロール用に感度を小さくする,,,,,,,,,,,,,,
@@ -143,6 +155,52 @@
                 , <&macro_tap &tog REMOTE>
                 ;
         };
+        // Windows 基本レイヤーのままプロファイル0へ。&to 0 だと Windows が外れる
+        bt_direct_win: bt_direct_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings
+                = <&macro_tap &bt BT_SEL 0>
+                , <&macro_pause_for_release>
+                , <&macro_tap &to WINDOWS>
+                ;
+        };
+        // Windows 基本レイヤーのままプロファイル1へ。REMOTE は Mac の Jump Desktop 用なので乗せない
+        bt_remote_win: bt_remote_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings
+                = <&macro_tap &bt BT_SEL 1>
+                , <&macro_pause_for_release>
+                , <&macro_tap &to WINDOWS>
+                ;
+        };
+        // META の Z。離してから Mac の基本レイヤーだけにする（REMOTE も外れる）
+        os_mac: os_mac {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings
+                = <&macro_pause_for_release>
+                , <&macro_tap &to 0>
+                ;
+        };
+        // META の X。離してから WINDOWS を基本レイヤーにする（REMOTE も外れる）
+        os_win: os_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings
+                = <&macro_pause_for_release>
+                , <&macro_tap &to WINDOWS>
+                ;
+        };
     };
 
     behaviors {
@@ -186,7 +244,7 @@
 
         // { } は連続入力が多いため、ほぼ同時押しでも修飾ではなくお互いのタップにする。
         // ZMKでは「このキーは連続入力」は直接指定できないので、
-        // hold-trigger-key-positions は修飾にする相手キーなので、{ }（左Cmd/左Opt、位置 30 31）を外して書く。
+        // hold-trigger-key-positions は修飾にする相手キーなので、{ }（位置 30 31。Mac は左Cmd/左Opt、Windows は左Ctrl/左Win）を外して書く。
         mt_brace: mt_brace {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -329,10 +387,66 @@
             mods = <(MOD_RSFT|MOD_RGUI)>;
             keep-mods = <(MOD_RSFT|MOD_RGUI)>;
         };
+        // Windows 写し。右Cmdの位置が右Ctrlになるので MOD_RCTL で見る
+        mb1_rs_win: mb1_rs_win {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&ak_mb1>, <&kp COMMA>;
+            mods = <(MOD_RSFT|MOD_RCTL)>;
+            keep-mods = <(MOD_RSFT|MOD_RCTL)>;
+        };
+        mb1_ls_win: mb1_ls_win {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&mb1_rs_win>, <&mkp MB1>;
+            mods = <(MOD_LSFT)>;
+            keep-mods = <(MOD_LSFT)>;
+        };
+        mb2_rs_win: mb2_rs_win {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&ak_mb2>, <&kp DOT>;
+            mods = <(MOD_RSFT|MOD_RCTL)>;
+            keep-mods = <(MOD_RSFT|MOD_RCTL)>;
+        };
+        mb2_ls_win: mb2_ls_win {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&mb2_rs_win>, <&mkp MB2>;
+            mods = <(MOD_LSFT)>;
+            keep-mods = <(MOD_LSFT)>;
+        };
+        mb1_aml_win: mb1_aml_win {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&mkp MB1>, <&kp COMMA>;
+            mods = <(MOD_RSFT|MOD_RCTL)>;
+            keep-mods = <(MOD_RSFT|MOD_RCTL)>;
+        };
+        mb2_aml_win: mb2_aml_win {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&mkp MB2>, <&kp DOT>;
+            mods = <(MOD_RSFT|MOD_RCTL)>;
+            keep-mods = <(MOD_RSFT|MOD_RCTL)>;
+        };
+    };
+
+    // ボールは常に MOUSE を足す。Windows 基本のときだけ WIN_MOUSE に載せ替える。
+    // それ以外の Windows 層は基本レイヤー側の hold から直接入る（Mac 層と混ぜない）。
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        win_mouse_if {
+            if-layers = <WINDOWS MOUSE>;
+            then-layer = <WIN_MOUSE>;
+        };
     };
 
     keymap {
         compatible = "zmk,keymap";
+
+        // 0  Mac 基本。起動時ここ。
 
         default_layer {
             bindings = <
@@ -345,7 +459,8 @@
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
         };
 
-        // プロファイル1（リモート接続）で足す。親指の英数/かなと、そのときの FUNCTION だけ差し替える
+        // 1  Mac の Jump Desktop。プロファイル1で足す。英数/かなと、そのときの FUNCTION だけ差し替える
+
         REMOTE {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                                          &trans  &trans  &trans  &trans  &trans
@@ -355,7 +470,7 @@
             >;
         };
 
-        //2
+        // 2  Mac。ボール操作中
 
         MOUSE {
             bindings = <
@@ -366,7 +481,7 @@
             >;
         };
 
-        //3
+        // 3  Mac 記号
 
         MARK {
             bindings = <
@@ -379,7 +494,7 @@
             sensor-bindings = <&re_kp C_VOL_DN C_VOL_UP>;
         };
 
-        //4
+        // 4  Mac Jump Desktop の FUNCTION
 
         FUNCTION {
             bindings = <
@@ -392,7 +507,8 @@
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
         };
 
-        //5 プロファイル0（直接接続）の FUNCTION。英数は LANG2、かなは LANG1
+        // 5  Mac 直接接続の FUNCTION。英数は LANG2、かなは LANG1
+
         FUNCTION_DIRECT {
             bindings = <
 &kp F1    &kp F2   &kp F3   &kp F4   &kp F5                    &kp BSPC  &kp PG_UP  &kp HOME  &kp LANG1  &mo META
@@ -404,7 +520,7 @@
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
         };
 
-        //6
+        // 6  Mac ホイール
 
         SCROLL {
             bindings = <
@@ -415,18 +531,18 @@
             >;
         };
 
-        //7  Bluetooth。FUNCTION の P をホールドして入る
+        // 7  Mac Bluetooth。FUNCTION の P をホールドして入る。Z が Mac、X が Windows
 
         META {
             bindings = <
 &bt_direct       &bt_remote   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4                    &bt BT_PRV  &bt BT_NXT  &trans  &trans  &trans
 &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4                   &trans      &trans      &trans  &trans  &trans
-&trans         &trans         &trans         &trans         &trans                          &trans      &trans      &trans  &bt BT_CLR  &bt BT_CLR_ALL
+&os_mac        &os_win        &trans         &trans         &trans                          &trans      &trans      &trans  &bt BT_CLR  &bt BT_CLR_ALL
 &trans         &trans         &trans         &trans         &trans        &trans  &trans    &trans                  &trans  &trans  &trans
             >;
         };
 
-        //8  プロファイル1のホイール。向きは直接接続と逆、速度は半分（1/60）
+        // 8  Mac Jump Desktop のホイール。向きは直接接続と逆、速度は半分（1/60）
 
         SCROLL_REMOTE {
             bindings = <
@@ -434,6 +550,111 @@
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB3  &mkp MB4        &trans  &trans  &mkp MB5
+            >;
+        };
+
+        // 9  Windows を 10 から始めるための空き。入らない
+
+        unused_9 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans
+            >;
+        };
+
+        // 10  Windows 基本（= Mac 0）。hold 先も Windows 側だけを指す
+
+        windows {
+            bindings = <
+&kp Q     &kp W     &kp E      &kp R    &kp T                                                  &kp Y  &kp U     &kp I      &kp O     &kp P
+&kp A     &kp S     &kp D      &kp F    &kp G                                                  &kp H  &lsc WIN_SCROLL J  &kp K      &kp L     &kp MINUS
+&kp Z     &kp X     &kp C      &kp V    &kp B                                                  &kp N  &kp M     &mb1_ls_win  &mb2_ls_win  &kp BSPC
+&kp LCTRL &kp LWIN  &kp LALT   &kp TAB  &mt LSHFT LANG2  &ak_lt WIN_FUNCTION_DIRECT SPACE  &ak_lt WIN_MARK RET  &mt RSHFT LANG1  &kp RALT  &kp RWIN  &kp RCTRL
+            >;
+
+            sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
+        };
+
+        // 11  REMOTE（1）相当の空き。Jump Desktop は Windows に無い
+
+        unused_11 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans
+            >;
+        };
+
+        // 12  Windows ボール（= Mac MOUSE 2）。WINDOWS+MOUSE のとき conditional で乗る
+
+        win_mouse {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans         &trans         &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans         &trans         &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &mb1_aml_win   &mb2_aml_win   &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans             &trans         &trans         &trans
+            >;
+        };
+
+        // 13  Windows 記号（= Mac MARK 3）
+
+        win_mark {
+            bindings = <
+&kp N1                    &kp N2                    &kp N3      &kp N4         &kp N5                                 &kp N6               &kp N7       &kp N8      &kp N9              &kp N0
+&kp LS(N1)                &kp LS(N2)                &kp LS(N3)  &kp LS(N4)     &kp LS(N5)                             &kp LS(N6)           &kp LS(N7)   &kp LS(N8)  &kp LS(N9)          &kp LS(N0)
+&kp LBKT                  &kp RBKT                  &kp EQUAL   &kp LS(EQUAL)  &kp SEMI                               &kp GRAVE            &kp LS(SQT)  &kp SQT     &kp BSLH            &kp FSLH
+&mt_brace LCTRL LS(LBKT)  &mt_brace LWIN LS(RBKT)   &trans      &trans         &mt LSHFT LS(SEMI)  &kp SPACE  &trans  &mt RSHFT LS(GRAVE)               &trans      &mt RWIN LS(BSLH)   &mt RCTRL LS(FSLH)
+            >;
+
+            sensor-bindings = <&re_kp C_VOL_DN C_VOL_UP>;
+        };
+
+        // 14  FUNCTION（4）相当の空き。Jump Desktop 用 FUNCTION は Windows に無い
+
+        unused_14 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans
+            >;
+        };
+
+        // 15  Windows FUNCTION（= Mac FUNCTION_DIRECT 5）。META だけ WIN_META
+
+        win_function_direct {
+            bindings = <
+&kp F1    &kp F2   &kp F3   &kp F4   &kp F5                    &kp BSPC  &kp PG_UP  &kp HOME  &kp LANG1  &mo WIN_META
+&kp F6    &kp F7   &kp F8   &kp F9   &kp F10                   &kp LEFT  &kp DOWN   &kp UP    &kp RIGHT  &kp LANG2
+&kp BSPC  &kp DEL  &kp ESC  &kp F11  &kp F12                   &kp END   &kp PG_DN  &trans    &trans    &trans
+&trans    &trans   &trans   &trans   &trans   &trans  &kp RET  &trans               &trans    &trans     &trans
+            >;
+
+            sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
+        };
+
+        // 16  Windows ホイール（= Mac SCROLL 6）
+
+        win_scroll {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &mkp MB3  &mkp MB4        &trans  &trans  &mkp MB5
+            >;
+        };
+
+        // 17  Windows Bluetooth（= Mac META 7）。プロファイル 0/1 でも Windows のまま。REMOTE は乗せない
+
+        win_meta {
+            bindings = <
+&bt_direct_win  &bt_remote_win  &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4                    &bt BT_PRV  &bt BT_NXT  &trans  &trans  &trans
+&bt BT_DISC 0   &bt BT_DISC 1   &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4                   &trans      &trans      &trans  &trans  &trans
+&os_mac         &os_win         &trans         &trans         &trans                          &trans      &trans      &trans  &bt BT_CLR  &bt BT_CLR_ALL
+&trans          &trans          &trans         &trans         &trans        &trans  &trans    &trans                  &trans  &trans  &trans
             >;
         };
     };
